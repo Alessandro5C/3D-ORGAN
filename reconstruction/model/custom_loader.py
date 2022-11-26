@@ -28,6 +28,7 @@ class CustomLoader(data.Dataset):
             labels = le.fit_transform(self.data['labels'])
             joblib.dump(le, open(le_file, 'wb'))
             
+
         self.le = le
         self.labels = labels
 

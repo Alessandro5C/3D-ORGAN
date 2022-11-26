@@ -5,3 +5,4 @@ arq_dataset: /home/rhermoza/data/3d/custom_arq_dataset.npy
 arq_dataset2: /home/rhermoza/data/3d/custom_arq_dataset2.npy
 larco: /home/rhermoza/data/3d/Larco-dataset/voxels.npy
 chairnet: datasets/chairnet.npy
+chairnet3: datasets/chairnet3.npy

@@ -1,6 +1,7 @@
 import click, os, multiprocessing, torch
 import joblib
 import numpy as np
+from torch import device
 from collections import deque
 from time import time
 from keras.utils import plot_model
@@ -26,7 +27,11 @@ def check_epoch(file):
 
 def get_batch(iter_loader):
     x = next(iter_loader)
+    # x[0] = x[0].numpy().to(device('cuda:0'))
+    # x[1] = x[1].numpy().to(device('cuda:0'))
+    # x[2] = x[2].numpy().to(device('cuda:0'))
     return x[0].numpy(), x[1].numpy(), x[2].numpy()
+    # return x[0], x[1], x[2]
 
 def write_generator_loss(file, epoch, v, gan=True):
     lines = ''
