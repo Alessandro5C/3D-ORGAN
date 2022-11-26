@@ -17,7 +17,7 @@ def read_npz(filename, points_name="points", mesh_name="mesh"):
     """
 
     data = {}
-    with np.load(filename) as npz:
+    with np.load(filename, allow_pickle=True) as npz:
         data["points"] = pd.DataFrame(npz[points_name])
         if mesh_name in npz:
             data["mesh"] = pd.DataFrame(npz[mesh_name])

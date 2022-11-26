@@ -3,8 +3,8 @@ from keras.models import Model
 from keras.layers import Input, Dense, Reshape, Flatten, Activation
 from keras.layers import Embedding, Lambda, Concatenate, Add
 from keras.layers.convolutional import Conv3DTranspose, Conv3D
-from keras.layers.normalization import BatchNormalization
-from keras.layers.advanced_activations import LeakyReLU
+from tensorflow.keras.layers import BatchNormalization
+from keras.layers import LeakyReLU
 import keras.backend as K
 
 # Discriminator models:

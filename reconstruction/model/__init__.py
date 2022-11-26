@@ -1,4 +1,5 @@
-import click, os, multiprocessing, torch, pickle
+import click, os, multiprocessing, torch
+import joblib
 import numpy as np
 from collections import deque
 from time import time
@@ -125,11 +126,13 @@ class LoadModel(object):
         self.generator_log_file = os.path.join(out_path, 'generator_log.csv')
         self.training_log_file = os.path.join(out_path, 'training_log.csv')
         self.model_g_file = os.path.join(out_path, 'model_generator.h5')
-        self.active_files = [self.generator_log_file, self.training_log_file, self.model_g_file]
+        # self.active_files = [self.generator_log_file, self.training_log_file, self.model_g_file]
+        self.active_files = [self.model_g_file]
         if self.gan:
             self.discriminator_log_file = os.path.join(out_path, 'discriminator_log.csv')
             self.model_d_file = os.path.join(out_path, 'model_discriminator.h5')
-            self.active_files += [self.discriminator_log_file, self.model_d_file]
+            # self.active_files += [self.discriminator_log_file, self.model_d_file]
+            self.active_files += [self.model_d_file]
             
         self.overwrite = overwrite
         self.trained = False
@@ -192,7 +195,7 @@ class LoadModel(object):
         self.data_loaded = True
     
     def _load_n_labels(self):
-        self.label_encoder = pickle.load(open(os.path.join(self.out_path, 'label_encoder.pkl'), 'rb'))
+        self.label_encoder = joblib.load(open(os.path.join(self.out_path, 'label_encoder.pkl'), 'rb'))
         self.n_labels = len(self.label_encoder.classes_)
 
     def build_models(self, force=False):

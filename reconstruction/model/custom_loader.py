@@ -1,28 +1,32 @@
-import os, pickle
+import os
+import joblib
 import numpy as np
 import torch.utils.data as data
 import torch.nn.functional as F
 from sklearn.preprocessing import LabelEncoder
-from ..utils.data_prep import get_fractured
+
+import repackage
+repackage.up()
+from utils.data_prep import get_fractured
 
 class CustomLoader(data.Dataset):
     def __init__(self, file, out_folder, subset='train', **kwargs):
         self.file = file
         self.out_folder = out_folder
         self.subset = subset
-        self.data = np.load(file).item()[self.subset]
+        self.data = np.load(file, allow_pickle=True).item()[self.subset]
         self.load_labels()
         self.fracture_opts = kwargs
         
     def load_labels(self):
         le_file = os.path.join(self.out_folder, 'label_encoder.pkl')
         if os.path.exists(le_file):
-            le = pickle.load(open(le_file, 'rb'))
+            le = joblib.load(open(le_file, 'rb'))
             labels = le.transform(self.data['labels'])
         else:
             le = LabelEncoder()
             labels = le.fit_transform(self.data['labels'])
-            pickle.dump(le, open(le_file, 'wb'))
+            joblib.dump(le, open(le_file, 'wb'))
             
         self.le = le
         self.labels = labels
