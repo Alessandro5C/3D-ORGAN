@@ -2,7 +2,7 @@ import numpy as np
 from keras import backend as K
 from keras.models import Model
 from keras.layers import Input
-from tensorflow.keras.layers import concatenate as _Merge
+from tensorflow.keras.layers import Concatenate as _Merge
 from keras.optimizers import Adam
 from functools import partial
 
