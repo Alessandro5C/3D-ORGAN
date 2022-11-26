@@ -126,13 +126,11 @@ class LoadModel(object):
         self.generator_log_file = os.path.join(out_path, 'generator_log.csv')
         self.training_log_file = os.path.join(out_path, 'training_log.csv')
         self.model_g_file = os.path.join(out_path, 'model_generator.h5')
-        # self.active_files = [self.generator_log_file, self.training_log_file, self.model_g_file]
-        self.active_files = [self.model_g_file]
+        self.active_files = [self.generator_log_file, self.training_log_file, self.model_g_file]
         if self.gan:
             self.discriminator_log_file = os.path.join(out_path, 'discriminator_log.csv')
             self.model_d_file = os.path.join(out_path, 'model_discriminator.h5')
-            # self.active_files += [self.discriminator_log_file, self.model_d_file]
-            self.active_files += [self.model_d_file]
+            self.active_files += [self.discriminator_log_file, self.model_d_file]
             
         self.overwrite = overwrite
         self.trained = False
